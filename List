@@ -1,0 +1,209 @@
+
+public class List {
+	private ListNode head;  
+    private int index = 0; 
+ 
+    //Constructor
+    public List() {  this.head = null;  }
+    public List(ListNode ln){  this.head = ln;  }
+    
+    //return the length of List   
+    public int getListLength(ListNode ln){  
+        int length=0;  
+        while(head!=null){  
+            length++;  
+            head=head.next;  
+        }  
+        return length;  
+    }
+    
+    //Insertion
+    public ListNode insertNode(int id, int val) {  
+         ListNode node = new ListNode(val);  
+         ListNode current = head;  
+         ListNode previous = head; 
+         if(id == 0){
+        	 node. next = head;  
+             head = node; 
+         }
+         else{
+        	while ( index != id) {  
+        		previous = current;  
+        		current = current. next;  
+        		index++;  
+        	}  
+        	node. next = current;  
+        	previous. next = node;  
+        	index = 0;
+         }     
+         return head;
+    }  
+    
+    //Deletion
+    public ListNode deleteNode(int id) {  
+        ListNode current = head;  
+        ListNode previous = head;  
+        while( index != id) {  
+            index++;  
+            previous = current;
+            current = current.next;  
+        }  
+        if(current == head) {  
+        	head = head.next;  
+        }else{  
+            index = 0;  
+            previous.next = current.next;  
+        }  
+        return head;  
+    }  
+    
+    //Search by index  
+    public ListNode searchByIndex(int id) {   
+    	ListNode current = head;
+        while(index != id) {   
+        	current = current.next; 
+            index++;  
+        }  
+        return current;  
+    }  
+
+    //Search by value
+    public ListNode searchByValue(int value) {  
+        ListNode current = head;
+        while(current.val != value) {    
+            current = current.next;  
+        }  
+        return current;  
+   }
+    
+    //reverse the List
+    public ListNode reverseList(ListNode head){  
+        if(head==null||head.next==null) return head;  
+        ListNode previous = null; 
+        ListNode current  = head;
+        ListNode next     = null;  
+        while(current != null){  
+            next 		 = current.next;  
+            current.next = previous;  
+            previous 	 = current;  
+            current 	 = next;  
+        }  
+        return previous;  
+    }
+    
+    //reverse the List recursively
+    public ListNode reverseListRec(ListNode head){  
+        if(head==null||head.next==null) return head;  
+        ListNode reverseHead = reverseListRec(head.next); 
+        System.out.println(reverseHead.val + " " + head.val);
+        head.next.next=head;  //17.next -> 16  16.next -> 15 ...
+        head.next=null;  
+        return reverseHead;  
+    }  
+    
+    //get kth Node from the bottom of List
+    //1st from the bottom means the last node
+    public ListNode GetKthBottomNode(ListNode head,int k){  
+        if(head==null)	return head;  
+        int length = this.getListLength(head);  
+        if(k>length)	return null;  
+        ListNode target	=head;  
+        ListNode next	=head;  
+        for(int i=0;i<k;i++){  
+            next=next.next;  
+        }  
+        while(next!=null){  
+            target	=target.next;  
+            next	=next.next;  
+        }  
+        return target;  
+    }  
+    
+    //return the first node where two LinkedList intersects
+    //if not, return null
+    public ListNode isIntersect(ListNode head1,ListNode head2){  
+        ListNode target=null;  
+        if(head1==null||head2==null) return target;  
+        int len1 = this.getListLength(head1);  
+        int len2 = this.getListLength(head2);  
+        if(len1>=len2){  
+            for(int i=0;i<len1-len2;i++){  
+                head1=head1.next;  
+            }  
+        }else{  
+            for(int i=0;i<len2-len1;i++){  
+                head2=head2.next;  
+            }  
+        }  
+        while(head1!=null&&head2!=null){  
+            if(head1==head2){  
+                target=head1;  
+                break;  
+            }  
+            else{  
+                head1=head1.next;  
+                head2=head2.next;  
+            }  
+        }  
+        return target;  
+    }
+    
+    //Print
+    public void show(){
+    	ListNode node = head;
+    	System.out.println("index: " + index);
+    	System.out.println("List: ");
+    	while( node != null ){
+    		System.out.print(node.val + " ");
+    		node = node.next;
+    	}
+    	System.out.println();
+    }
+    
+    public static void main(String[] args){
+    	//Initialization
+    	ListNode ln0 = new ListNode(0); ListNode ln1 = new ListNode(1); ListNode ln2 = new ListNode(2);
+    	ListNode ln3 = new ListNode(3); ListNode ln4 = new ListNode(4); ListNode ln5 = new ListNode(5);
+    	ListNode ln6 = new ListNode(6); ListNode ln7 = new ListNode(7); ListNode ln8 = new ListNode(8);
+    	ListNode ln9 = new ListNode(9); ListNode ln10 = new ListNode(10); ListNode ln11 = new ListNode(11);
+    	ListNode ln12 = new ListNode(12); ListNode ln13 = new ListNode(13); ListNode ln14 = new ListNode(14);
+    	ListNode ln15 = new ListNode(15); ListNode ln16 = new ListNode(16); ListNode ln17 = new ListNode(17);
+    	ln0.next = ln1; ln1.next = ln2; ln2.next = ln3; ln3.next = ln4; ln4.next = ln5; ln5.next = ln6;
+    	ln6.next = ln7; ln7.next = ln8; ln8.next = ln9; ln9.next = ln10; ln10.next = ln11; ln11.next = ln12;
+    	ln12.next = ln13; ln13.next = ln14; ln14.next = ln15; ln15.next = ln16; ln16.next = ln17; 
+    	
+    	//test
+    	List list = new List(ln0);
+
+//    	list.insertNode(4, 2);
+//    	list.show();
+//    	list.deleteNode(5);
+//    	list.show();
+//    	ListNode res1 = list.searchByIndex(12);
+//    	res1.show();
+//    	ListNode res2 = list.searchByValue(12);
+//    	res2.show();
+//    	list.reverseList(ln0);
+    	list.GetKthBottomNode(ln0, 1).show();;
+    	
+    }
+}
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+    
+    public void show(){
+    	System.out.println("Node: " + val);
+    }
+}
