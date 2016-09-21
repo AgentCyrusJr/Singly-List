@@ -7,7 +7,11 @@ public class List {
     public List() {  this.head = null;  }
     public List(ListNode ln){  this.head = ln;  }
     
-    //return the length of List   
+    /**
+     * return the length of List 
+     * @param ln is head node of List
+     * @return length of List
+     */ 
     public int getListLength(ListNode ln){  
         int length=0;  
         while(head!=null){  
@@ -17,7 +21,12 @@ public class List {
         return length;  
     }
     
-    //Insertion
+    /**
+     * Insertion
+     * @param id is where the node should be put
+     * @param val is the value of the node
+     * @return head node of List
+     */
     public ListNode insertNode(int id, int val) {  
          ListNode node = new ListNode(val);  
          ListNode current = head;  
@@ -39,7 +48,11 @@ public class List {
          return head;
     }  
     
-    //Deletion
+    /**
+     * Deletion
+     * @param id is the index of which node you wish to delete
+     * @return head node of List
+     */
     public ListNode deleteNode(int id) {  
         ListNode current = head;  
         ListNode previous = head;  
@@ -57,7 +70,11 @@ public class List {
         return head;  
     }  
     
-    //Search by index  
+    /**
+     * Search by index 
+     * @param id is the index of which node you wish to search
+     * @return target node
+     */
     public ListNode searchByIndex(int id) {   
     	ListNode current = head;
         while(index != id) {   
@@ -67,7 +84,11 @@ public class List {
         return current;  
     }  
 
-    //Search by value
+    /**
+     * Search by value
+     * @param value is the value of which node you wish to search
+     * @return target node
+     */
     public ListNode searchByValue(int value) {  
         ListNode current = head;
         while(current.val != value) {    
@@ -76,7 +97,11 @@ public class List {
         return current;  
    }
     
-    //reverse the List
+    /**
+     * reverse the List with loop
+     * @param head is head node of List
+     * @return head node of reversed List
+     */
     public ListNode reverseList(ListNode head){  
         if(head==null||head.next==null) return head;  
         ListNode previous = null; 
@@ -91,7 +116,11 @@ public class List {
         return previous;  
     }
     
-    //reverse the List recursively
+    /**
+     * reverse the List recursively
+     * @param head is head node of List
+     * @return head node of reversed List
+     */
     public ListNode reverseListRec(ListNode head){  
         if(head==null||head.next==null) return head;  
         ListNode reverseHead = reverseListRec(head.next); 
@@ -101,8 +130,12 @@ public class List {
         return reverseHead;  
     }  
     
-    //get kth Node from the bottom of List
-    //1st from the bottom means the last node
+    /**
+     * get kth Node from the bottom of List, 1st from the bottom means the last node
+     * @param head is head node of List
+     * @param k indicates kth node from the bottom, starting with 1(not zero-based)
+     * @return head node of List
+     */
     public ListNode GetKthBottomNode(ListNode head,int k){  
         if(head==null)	return head;  
         int length = this.getListLength(head);  
@@ -119,8 +152,12 @@ public class List {
         return target;  
     }  
     
-    //return the first node where two LinkedList intersects
-    //if not, return null
+    /**
+     * see if two Lists intersect at certain node
+     * @param head1 head node of List1
+     * @param head2 head node of List2
+     * @return the first node where two LinkedList intersects, if not, @return null
+     */
     public ListNode isIntersect(ListNode head1,ListNode head2){  
         ListNode target=null;  
         if(head1==null||head2==null) return target;  
@@ -184,20 +221,10 @@ public class List {
 //    	ListNode res2 = list.searchByValue(12);
 //    	res2.show();
 //    	list.reverseList(ln0);
-    	list.GetKthBottomNode(ln0, 1).show();;
-    	
+    	list.GetKthBottomNode(ln0, 1).show();; 	
     }
 }
 
-
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 class ListNode {
     int val;
     ListNode next;
