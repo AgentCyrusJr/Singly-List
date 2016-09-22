@@ -3,9 +3,33 @@ public class List {
 	private ListNode head;  
     private int index = 0; 
  
-    //Constructor
+    /**
+     * Constructor
+     */
     public List() {  this.head = null;  }
     public List(ListNode ln){  this.head = ln;  }
+    
+    /**
+     * Construct a List with numbers in the array
+     * @param int_array is input array for constructing the List
+     * @return head node of List
+     */
+    public ListNode constructList(int[] int_array){
+    	ListNode head = null;
+    	ListNode current = head;
+    	for(int element : int_array){
+    		if(head == null){
+    			head = new ListNode(element);
+    			current = head;
+    		}
+    		else{
+    			current.next = new ListNode(element);
+    			current = current.next;
+    		}
+    	}
+    	return head;
+    }
+    
     
     /**
      * return the length of List 
@@ -41,8 +65,8 @@ public class List {
         		current = current. next;  
         		index++;  
         	}  
-        	node. next = current;  
-        	previous. next = node;  
+        	node.next = current;  
+        	previous.next = node;  
         	index = 0;
          }     
          return head;
@@ -185,8 +209,11 @@ public class List {
         return target;  
     }
     
-    //Print
-    public void show(){
+    /**
+     * print each value of List
+     * @param head is head node of List
+     */
+    public void show(ListNode head){
     	ListNode node = head;
     	System.out.println("index: " + index);
     	System.out.println("List: ");
@@ -211,17 +238,9 @@ public class List {
     	
     	//test
     	List list = new List(ln0);
+    	int[] array = {1};
+    	list.show(list.constructList(array));
 
-//    	list.insertNode(4, 2);
-//    	list.show();
-//    	list.deleteNode(5);
-//    	list.show();
-//    	ListNode res1 = list.searchByIndex(12);
-//    	res1.show();
-//    	ListNode res2 = list.searchByValue(12);
-//    	res2.show();
-//    	list.reverseList(ln0);
-    	list.GetKthBottomNode(ln0, 1).show();; 	
     }
 }
 
